@@ -1,4 +1,8 @@
 
+<!--
+title: Silky的配置
+-->
+
 ## 简述
 
 Silky的配置文件分为两个部分，第一个是项目配置文件，文件位置是`当前项目/.silky/config.js`；另一个是全局的配置文件，文件位置是`$HOME/.silky/config.js`。

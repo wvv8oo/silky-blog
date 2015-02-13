@@ -1,4 +1,8 @@
 
+<!--
+title: Silky的命令
+-->
+
 ## 本文目标
 
 * 全面介绍Silky的命令
@@ -7,7 +11,6 @@
 
 * Windows系统中，推荐使用`git bash`或者`power shell`
 * *nix系统中，打开终端(Terminal)即可输入命令即可
-
 
 ## 命令介绍
 

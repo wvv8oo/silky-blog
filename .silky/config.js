@@ -2,14 +2,6 @@ module.exports = {
     //配置文件的版本，和silky的版本无关
     version: 0.2,
     //80端口在*nix下需要sudo
-    port: 14422,
-    //代理配置相关，兼容json-proxy的代理配置
-    proxy: {
-        forward: {
-            //定义代理转发
-            //"/ajax": "/"
-        }
-    },
     //路由
     routers: [
          {
@@ -19,8 +11,21 @@ module.exports = {
     ],
     //插件的配置
     plugins: {
-        "honey-preview": {
-            server: "108"
+        "blog": {
+            //数据的主目录
+            dataDir: './content',
+            blog: {
+                //博客标题
+                title: "Silky官方博客",
+                //副标题
+                description: "前端模块化开发与构建工具",
+                //主机地址
+                host: 'http://silky.wvv8oo.com/',
+                //rss地址
+                feed: 'http://silky.wvv8oo.com/rss.xml',
+                //作者
+                author: 'wvv8o'
+            }
         }
     },
     //build的配置
@@ -28,18 +33,11 @@ module.exports = {
         //构建的目标目录，命令行指定的优先
         output: "./build",
         //将要复制的文件目录，直接复制到目标
-        copy: [/^images(\-demo)?$/i],
+        copy: [/images/],
         //完全忽略处理的文件
-        ignore: [/^template\/module$/i, /^css\/module$/i, /^\..+/],
+        ignore: [/^template\/module$/i, /^css\/module$/i, /^\..+/, "docs"],
         //重命名
-        rename: [
-            {
-                source: /source\.(js)$/i, target: '$1', next: false
-            },
-            {
-                source: /^template\/(.+)/i, target: '$1', next: false
-            }
-        ],
+        rename: [],
         //是否压缩
         compress: {
             //将要忽略压缩的文件
