@@ -11,7 +11,7 @@ module.exports = {
     ],
     //插件的配置
     plugins: {
-        "blog": {
+        "markdown-blog": {
             //数据的主目录
             dataDir: './content',
             blog: {
