@@ -6,7 +6,7 @@ module.exports = {
     routers: [
          {
              //path: 原路径，to: 替换后的路径，next：是否继承执行下一个路由替换，static：是否为静态文件，静态文件直接返回
-             path: /^\/$/, to: '/index.html', next: true
+             path: /^\/$/, to: '/index.html', next: false
          }
     ],
     //插件的配置

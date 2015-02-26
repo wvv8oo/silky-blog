@@ -10,7 +10,7 @@ title: Silky的命令
 ## 如何使用
 
 * Windows系统中，推荐使用`git bash`或者`power shell`
-* *nix系统中，打开终端(Terminal)即可输入命令即可
+* *nix系统中，打开终端(Terminal)即可输入命令
 
 ## 命令介绍
 
@@ -25,10 +25,10 @@ title: Silky的命令
 
 ### silky build
 
-编译Silky项目，也可以用于编译非Silky项目。执行此命令会
+编译Silky项目，也可以用于编译非Silky项目。
 
 * `-o`或者`--output`，指定输出目录，默认情况下会输出到`./build`
-* `-e`或者`--environment`，指定运行环境，build的默认环境
+* `-e`或者`--environment`，指定运行环境，build的默认环境为`production`
 * `-f`或者`--force`，在非Silky项目中强行编译，如果你要编译的目录是一个非Silky项目，那么需要指定`-f`参数
 * `-x`或者`--extra`，扩展参数，此参数提供给插件用，根据具体的插件而定
 * `-c`或者`--config`，指定配置文件，默认情况下，配置文件文件为`.silky/config.js`，如果你想单独指定一个配置文件，可以使用此参数
@@ -37,12 +37,12 @@ title: Silky的命令
 
 在当前目录初始化silky项目，这将会在当前目录创建一个`.silky`的文件夹，并且会复制默认的配置文件到此目录，但不会删除当前目录的任何文件。
 
-* `-f`或者`--force`，强制覆盖当前目录，这将会创建一个示例项目到当前目录，**注意：这将会删除当前目录的所有文件**
+* `-f`或者`--force`，强制清除当前目录并创建一个示例项目，**警告：这将会删除当前目录的所有文件**
 
 ### silky install [plugin...]
 
 安装Silky插件，可以指定一个插件名，也可以指定多个插件，插件名之间用空格隔开。如`silky install sample`，或者`silky install sample blog`
-注意此功能需要访问`github.com`，因为众所周知的原因，github.com在某些时候可能会无法访问，所以，你需要保持github.com的畅通。
+注意此功能需要访问`github.com`，由于众所周知的原因，github.com在某些时候可能会无法访问，所以，你需要保持github.com的畅通。
 
 ### silky uninstall [plugin...]
 

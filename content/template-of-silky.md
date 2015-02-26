@@ -8,13 +8,15 @@ title: Silky的模板
 
 ## 综述
 
-模板最主要的目的就是为了代码重用，例如每个页页都会有header和footer，通过模板引用，就不用再复制粘贴了。Silky使用Handlebars作为默认的模板引擎，更多的Handlebars想关的文档与介绍，请点击[英文官网](http://handlebarsjs.com/) 或者 [中文教程](http://www.cnblogs.com/iyangyuan/p/3471227.html)
+模板最主要的目的就是为了代码重用，模块化开发的好处不言而喻。Silky使用Handlebars作为默认的模板引擎，更多的Handlebars相关的文档与介绍，请点击[英文官网](http://handlebarsjs.com/) 或者 [中文教程](http://www.cnblogs.com/iyangyuan/p/3471227.html)
 
 ## 新手用户
 
 默认情况下，Silky会创建一个template的文件夹，所以的模板和html文件都应该放在template文件夹中。模板文件应该以`.hbs`为扩展名，需要被引用的模板文件建议放在`template/module`文件夹下。
 
-例如我们现在有一个首页`index.hbs`，一个页头文件`header.hbs`，一个页脚文件`footer.hbs`，那么我们应该将`header.hbs`和`footer.hbs`文件放到`template/module`文件夹下，例如在Silky的示例项目中，目录结构如下：
+例如我们现在有一个首页`index.hbs`，一个页头文件`header.hbs`，一个页脚文件`footer.hbs`，那么我们应该将`header.hbs`和`footer.hbs`文件放到`template/module`文件夹下。
+
+在Silky的示例项目中，目录结构如下：
 
 	├── css
 	│   ├── main.less
@@ -27,8 +29,6 @@ title: Silky的模板
 	│   └── logo.png
 	├── js
 	│   ├── main.coffee
-	│   ├── runner
-	│   ├── utils
 	│   └── vendor
 	└── template
 	    ├── index.hbs
@@ -94,11 +94,11 @@ title: Silky的模板
 
 换句话说，如果你再创建一个数据文件`.silky/data/normal/custom.js`，然后在模板中你的引用方式应该是`{{custom.something}}`，如果你不确定引用是否正确，可以使用`{{print custom}}`来打印这个数据。
 
-当然我们还可能会使用到多环境的数据引用，更多请参考：[Silky中的多环境与数据文件的引用](/index.html)
+当然我们还可能会使用到多环境的数据引用，更多请参考：[Silky中的多环境与数据文件的引用](/post/running-environment-of-silky.html)
 
 ### js与css文件引用
 
-在Silky中，我们像平时一样引用js/css文件即可，但如果你在项目中使用了coffee或less，引用的文件名同样是`.css`和`.js`，因为Silky会自动处理，如果没有找到`.css`文件，就会查找`.less`文件，对于js的规则也是同样的。
+在Silky中，我们像平时一样引用js/css文件即可，但如果你在项目中使用了coffee或less，引用的文件名同样是`.js`或`.css`，因为Silky会自动处理，如果没有找到`.css`文件，就会查找`.less`文件，对于js的规则也是同样的。
 
 例如有如下引用：
 
@@ -112,17 +112,72 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 
 #### #each
 
+循环指令，例如：
+
+数据文件`.silky/data/normal/global.js`
+
+	module.exports = {
+	    "projects": [
+	    	{project: 'Silky'},
+	    	{project: 'charm.js'}
+	    ]
+	}
+
+模板文件：
+
+	<ul>
+		<li class="title">项目列表</li>
+		{{#each global.projects}}
+			<li>{{project}}</li>
+		{{/each}}
+	</ul>
+
+输出：
+
+	<ul>
+		<li class="title">项目列表</li>
+		<li>Silky</li>
+		<li>charm.js</li>
+	</ul>
+
 #### #if
+
+条件判断语句，例如
+
+	{{#if true}}
+		条件为真
+	{{/else}}
+		条件为假
+	{{/if}}
 
 #### unless
 
-#### 
+只有在条件为false的时候才输出，等同于else，下面两例
+
+使用`if/else`
+
+	{{#if condition}}
+
+	{{/else}}
+		条件为假
+	{{/if}}
+
+使用`unless`
+
+	{{unless condition}}
+		条件为假
+	{{/unless}}
+
+#### @index
+
+在使用`#each`进行循环输出的时候，你可以使用`@index`来获取索引
+
 
 ### Silky扩展指令
 
-#### import/partical
+#### import
 
-导入其它模板，支持相对路径和绝对路径，支持指定数据源，不需要指定`.hbs`扩展名。
+导入其它模板，支持相对路径和绝对路径，支持指定数据源，不需要指定`.hbs`扩展名。早前版本的Silky使用了`partial`指令，现在应当使用`import`，`partial`未来将会被抛弃。
 
 使用示例：
 
@@ -157,11 +212,11 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 	    Copyright &copy; <a href="http://example.com/" target="_blank">{{copyright}}</a>
 	</footer>
 
-这样在`footer.hbs`文件中，我们就可以用`{{copyright}}`来引用`global.footer.copyright`了。这样做的目的就是为了代码更简洁，当嵌套引用模块的时候，我们有可能会写很冗长的代码才能引用到数据。
+这样在`footer.hbs`文件中，我们就可以用`{{copyright}}`来引用`global.footer.copyright`了。这样做的目的就是为了代码更简洁。否则当嵌套引用模块的时候，我们有会需要写很冗长的代码才能引用到数据。
 
 ** 注意，这里会有陷阱！**
 
-如果指定了数据源，那么作用域将被改变，你在子模板中(上例的`footer.hbs`)所引用的数据源都是你所指定的数据源下（上例的数据源是`global.footer`）。在上面的示例中，如果你想在`header.hbs`中引用`global.title`这个数据，你无法使用`{{global.title}}`引用。但Silky提供另一种方法来引用全局数据，使用`_`可以在任何模块引用全局数据，如：`{{import _.global.title}}`
+如果指定了数据源，那么作用域将被改变，你在子模板中(上例的`footer.hbs`)所引用的数据源都是你所指定的数据源下（上例的数据源是`global.footer`）。在上面的示例中，如果你想在`header.hbs`中引用`global.title`这个数据，你无法使用`{{global.title}}`进行引用。但Silky提供另一种方法来引用全局数据，使用`_`可以在任何模块引用全局数据，如：`{{import _.global.title}}`。
 
 #### css
 
