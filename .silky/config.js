@@ -12,6 +12,7 @@ module.exports = {
     //插件的配置
     plugins: {
         "markdown-blog": {
+            source: '/Volumes/Files/WorkStation/silky-plugins/markdown-blog',
             //数据的主目录
             dataDir: './content',
             theme: 'blog-theme',

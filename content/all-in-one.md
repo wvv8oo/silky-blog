@@ -11,3 +11,4 @@ title: 文档索引
 * [配置Silky](/post/configure-of-silky.html)
 * [多国语言的支持](/post/how-to-use-mutil-language-with-silky.html)
 * [关于Silky](/post/about-silky.html)
+* [如何开发一个Silky插件](/post/how-to-develop-a-silky-plugin.html)

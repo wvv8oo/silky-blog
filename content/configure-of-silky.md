@@ -83,6 +83,18 @@ proxy:{
     
 默认情况下，可以使用`"pluginName": {}`即可，如果插件要求要提供其它配置，可以在这里配置插件，具体的参数请参考插件的要求。
 
+某些时候，你可能会使用一些私有的插件，那么此时，你可以利用`source`来指定插件的本地路径，source允许使用绝对路径与相对(相对于当前Silky项目)路径。
+
+例如：
+
+    plugins: {
+        "blog": {
+        	"source": "/path/to/silky-plugins/blog"
+        }
+    }
+
+此时，`blog`插件查找的路径将是`/path/to/silky-plugins/blog`，注意：你必需保证插件所依赖的npm包已经安装。
+
 ### build
 
 构建编译项目的配置
