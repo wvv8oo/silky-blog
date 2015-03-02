@@ -9,7 +9,7 @@ title: Silky插件之markdown-blog
 
 ## 功能介绍
 
-`markdown-blog`是一个根据markdown文档自动生成静态博客的插件，支持文章索引。一方面，可以将项目文档自动生成可索引的博客，另一方面，团队或者成员也可以用`markdown-blog`来写博客。现在Silky的官方博客就是用`markdown-blog`生成的。
+`markdown-blog`是一个根据markdown文档自动生成静态博客的插件，支持文章索引。一方面，可以将项目文档自动生成可索引的技术文档，另一方面，团队或者成员也可以用`markdown-blog`来写博客。现在Silky的官方博客就是用`markdown-blog`生成的。
 
 ## 主题
 
@@ -30,14 +30,14 @@ title: Silky插件之markdown-blog
 	excerpt: 关于Silky的介绍
 	-->
 	
-* `title` 文章的标题，如果没有设置，则使用文件名作为标题
+* `title` 文章的标题，如果没有指定，则使用文件名作为标题
 * `publish_date` 发布时间，默认的时间格式为：YYYY-MM-dd hh:mm。如果没有设置，则使用文件的最后修改时间作为发布时间
 * `link` 文章的链接，如果没有设置，则链接为文件名，例如文件名为`about.md`，那么链接就是`about.html`
 * `type` 文章类型，允许为`post`和`page`两种。默认为`post`，`page`不会列入索引
 * `status` 文章状态，允许为`publish`和`draft`，`draft`状态不会被发布，默认为`publish`
 * `excerpt` 文章摘要
 
-除了上述指定的键值之外，如果你是使用自己的主题，你还可以加入更多的自定义键值。
+除了上述指定的键值之外，如果你是使用自己的主题，你还可以加入更多的自定义键值。例如你在文章中增加一个自定义的键`my_attr`，那么在`post.hbs`中，你就可以使用`{{$$.plugin.post.my_attr}}`来引用。
 
 ## 进阶配置
 
@@ -82,4 +82,63 @@ rss配置，示例如下：
 
 ## 自定义主题
 
-暂略
+自定义主题放在当前项目的`themes/theme_name`文件夹下，假如我们要创建一个主题`my_theme`，那么你的主题文件应该放在`your_project/themes/my_theme`目录下。
+
+### 目录结构
+
+主题的目录结构与Silky项目的目录结构类似，但是没有`.silky`目录，一个主题的参考目录如下：
+
+````html
+.
+├── js
+├── css
+│   └── module
+│   └── main.less
+└── template
+	├── 404.hbs
+	├── home.hbs
+	├── index.hbs
+	├── module
+	│   ├── footer.hbs
+	│   ├── head.hbs
+	│   └── header.hbs
+	├── page.hbs
+	└── post.hbs
+````
+
+### 文件介绍
+
+下面的模板文件是必需存在的
+
+* `template/404.hbs` 找不到文件的模板
+* `template/home.hbs` 主页的模板
+* `template/index.hbs` 索引页的模板，注意，index不是首页
+* `template/page.hbs` page页的模板
+* `template/post.hbs` 文章页的模板
+* `template/module` 子模板目录
+
+### 数据引用
+
+* `$$.plugin.blog`，获取配置文件`config.js`中的`blog`键
+* `$$.plugin.posts`，获取文章的索引列表，示例：
+
+````html
+{{#each $$.plugin.posts}}
+	<div class="post">
+		<h1><a href="{{url}}">{{title}}</a></h1>
+		<span class="post-date">[{{date publish_date 'YYYY-MM-DD'}}]</span>
+		<div class="content">{{{plugin_content url}}}</div>
+		<p>&hellip;</p>
+	</div>
+{{/each}}
+````
+
+* `$$.plugin.pages`，获取page的索引列表，参考`$$.plugin.posts`
+* `$$.plugin.post`，获取文章或者page，仅限于`page.hbs`与`post.hbs`两个模板中可以。
+	* `{{date $$.plugin.post.publish_date 'YYYY-MM-DD hh:mm'}}`， 输出发布时间
+	* `{{$$.plugin.post.title}}`，文章或者page的标题
+
+### Handlebars指令扩展
+
+* `{{{plugin_markdown $$.plugin.post.content}}}`，将markdown的内容转换为html
+* `{{{plugin_content url}}}`，根据文章的url获取文章的内容，并将内容转换为html
