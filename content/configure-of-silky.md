@@ -44,6 +44,7 @@ proxy:{
 `routers`节点可以接受一个数组，如果你想把根目录转到index.html，那么你的配置应该是：
 
 	'routers': [
+		 //如果你希望以目录的形式访问，则需要删除此条路由
 		 {
 		 	//匹配根目录
 		    path: /^\/$/, 
@@ -53,7 +54,6 @@ proxy:{
 		    next: false
 		 }
 	]
-
 
 在angular项目中，我们可能需要将所有没有扩展名的url都转到`main.html`，那么我们的配置如下：
 
@@ -89,7 +89,10 @@ proxy:{
 
     plugins: {
         "blog": {
-        	"source": "/path/to/silky-plugins/blog"
+        	//强制指定本地的插件源
+        	"source": "/path/to/silky-plugins/blog",
+        	//禁止插件运行，默认为true
+        	enable: false
         }
     }
 

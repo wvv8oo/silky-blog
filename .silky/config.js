@@ -2,6 +2,7 @@ module.exports = {
     //配置文件的版本，和silky的版本无关
     version: 0.2,
     //80端口在*nix下需要sudo
+    port: 15319,
     //路由
     routers: [
          {
