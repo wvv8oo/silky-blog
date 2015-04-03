@@ -35,7 +35,7 @@ title: Silky的命令
 
 ### silky init [boilerplate]
 
-在当前目录初始化silky项目，这将会在当前目录创建一个`.silky`的文件夹，并且会复制默认的配置文件到此目录，但不会删除当前目录的任何文件。
+在当前目录初始化silky项目，这将会在当前目录创建一个`.silky`的文件夹，并且会复制默认的配置文件到此目录，但不会删除当前目录的任何文件。如果你不指定boilerplate，使用`silky init`会创建一个默认的项目，你也可以从官方样板库指定一个样板项目，或者使用自己的私有样板库。
 
 #### 从官方样板库中创建项目
 
@@ -48,7 +48,7 @@ Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerpl
 某些情况下，你可能会希望使用私有的样板项目，可以通过如下步骤：
 
 1. 创建一个git的样板仓库，你可以把它放到github，也可以是私有的gitlab，甚至是基于文件系统的本地git。现在我假定你的私用仓库地址是`git@your-git-repos.com:examples/silky-boilerplate.git`
-2. 通过命令指定私有的样板库地址，命令：`silky config set boilerplateRepository git@your-git-repos.com:examples/silky-boilerplate.git -g`，注意把仓库地址换成你真实的仓库地址
+2. 通过命令指定私有的样板库地址，命令：`silky config set boilerplateRepository git@your-git-repos.com:examples/silky-boilerplate.git -g`，注意把示例中的地址换成你真实的仓库地址
 3. 假定你创建了一个样板项目，名为my_boilerplate，然后`silky init my_boilerplate`
 
 #### 参数
