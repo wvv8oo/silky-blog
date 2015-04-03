@@ -4,8 +4,9 @@ title: Silky插件介绍
 
 ## 插件的安装与使用
 
-* 从官方库安装插件。使用`silky install plugin_name`即可安装
+* 从官方库安装插件，使用`silky install plugin_name`即可安装
 * 在你的项目中，需要添加这个插件的引用，用编译器打开项目中的`config.js`，找到`plugins`键，增加你将要使用的插件。常规的配置，只需要在`plugins`增加插件名称键即可，如：`"pluginName": {}`
+* 如果你希望使用自定义的项目库，可以修改全局配置中的custom.pluginRepository键，也可以使用命令：`silky config set pluginRepository your_repository_address`
 
 示例：
 
