@@ -71,7 +71,9 @@ Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerpl
 ### silky install [plugin...]
 
 安装Silky插件，可以指定一个插件名，也可以指定多个插件，插件名之间用空格隔开。如`silky install sample`，或者`silky install sample blog`
-注意此功能需要访问`github.com`，由于众所周知的原因，github.com在某些时候可能会无法访问，所以，你需要保持github.com的畅通。
+
+* 安装插件可能会需要权限，类Linux系统，请使用sudo进行安装
+* 此功能需要访问`github.com`，由于众所周知的原因，github.com在某些时候可能会无法访问，所以，你需要保持github.com的畅通。
 
 ### silky uninstall [plugin...]
 
