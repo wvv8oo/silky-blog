@@ -267,6 +267,20 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 * `{{loop "module/cell" 5}}` 循环cell这个子模板5次
 * `{{loop "module/cell" data}}` 根据data来循环cell这个子模板，此时data的数据类型应该是`array`。**注意：此时cell的数据作用域会被改变**
 
+### repeat
+
+重复内容N次，与loop不同的是，repeat并不引用子模板，仅仅是简单地重复。
+
+使用示例：
+
+````
+{{#repeat 5}}
+{{__index__}}. 我要出现5次
+{{/repeat}}
+````
+
+`{{__index__}}`表示当前的索引值。
+
 #### print
 
 print指令可以打印数据，一般用于调试使用，例如你可以使用`{{print global}}`来打印出整个global文件的数据。
