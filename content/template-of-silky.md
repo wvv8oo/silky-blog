@@ -146,7 +146,7 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 
 	{{#if true}}
 		条件为真
-	{{/else}}
+	{{else}}
 		条件为假
 	{{/if}}
 
@@ -158,7 +158,7 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 
 	{{#if condition}}
 
-	{{/else}}
+	{{else}}
 		条件为假
 	{{/if}}
 
