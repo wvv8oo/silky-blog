@@ -98,6 +98,52 @@ proxy:{
 
 此时，`blog`插件查找的路径将是`/path/to/silky-plugins/blog`，注意：你必需保证插件所依赖的npm包已经安装。
 
+### compiler
+
+用于配置编译器
+
+### rules
+
+根据路由规则匹配编译器，例如：
+
+````
+compiler: {
+	rules: [
+		//'/index.html'使用jade编译器
+		{path: /index\.html$/i, compiler: "jade"}
+	]
+}
+````
+
+### extension
+
+根据扩展名指定编译器，默认情况的编译器与扩展名的对应关系如下：
+
+````
+compiler: {
+	extension: {
+		html: 'hbs',
+		css: 'less',
+		js: 'coffee'
+	}
+}
+````
+
+### setting
+
+编译器配置，如下示例为less的编译器配置：
+
+````
+compiler: {
+	setting: {
+		//配置less的paths
+		less: {
+			paths: ['/less']
+		}
+	}
+}
+````
+
 ### build
 
 构建编译项目的配置
