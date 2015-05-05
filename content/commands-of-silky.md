@@ -39,7 +39,7 @@ title: Silky的命令
 
 #### 从官方样板库中创建项目
 
-Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerplate](这里)，官方样板项目库会提供一些常见的项目示例，在官方样板项目库中，每一个文件夹都是一个示例项目。例如你可以通过`silky init default`来安装默认的样板项目。
+Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerplate](这里)，官方样板项目库会提供一些常见的项目示例。例如你可以通过`silky init default`来安装默认的样板项目。
 
 在官方样板库中，根目录中的每一个文件夹，都是一个样板项目，你只需要通过`sily init folder_name`即可安装相应的样板项目。同样，自己创建私有的样板项目也基于同样的规则。
 
@@ -67,6 +67,7 @@ Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerpl
 * `silky config set [key] [value]`，设置某个键
 * `silky config remove [key]`，移除某个键
 * `silky config get [key]`，读取某个键
+* `silky config team honey`，设置为honey团队模式，将会改变plugin和boilerplate的镜像地址至内网
 
 ### silky install [plugin...]
 
@@ -83,3 +84,7 @@ Silky官方的样板项目库地址在 [https://github.com/wvv8oo/silky-boilerpl
 ### silky list
 
 列出已经安装的silky插件
+
+### silky cache clean
+
+清除缓存，安装插件与模板不成功，可以尝试使用这个功能清除缓存
