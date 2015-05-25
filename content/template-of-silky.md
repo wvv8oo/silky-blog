@@ -368,5 +368,90 @@ print指令可以打印数据，一般用于调试使用，例如你可以使用
 等同于javascript中的`a || b`, 在模板中可以实现同样的功能`{{or a b}}`
 
 
+#### compare
 
+比较两个参数，输出不同的结果，格式为：`{{compare left symbol right}}`，symbol可为`==, ===, !=, !==, <, <=, >, >=, in`之一，其中in要求right必需是array。
 
+示例：
+
+	{{#compare '1' '==' 1}}
+		正确
+	{{else}}
+		错误
+	{{/compare}}
+	
+
+#### execute
+
+执行函数，并允许提供参数，格式为，`{{#execute var1 var2 varN}}`，例如：
+
+`.silky/data/page.js`文件：
+
+	module.exports = {
+		testFunction: function(value){
+			return value > 10
+		}
+	}
+
+`index.hbs`文件：
+
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<title>Compare指令</title>
+		</head>
+		<body>
+			{{#execute page.testFunction 5}}
+				大于10
+			{{else}}
+				小于10
+			{{/execute}}
+		</body>
+	</html>
+	
+输出结果：
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    	<title>import示例</title>
+	    </head>
+	    <body>
+			小于10
+	    </body>
+	</html>
+
+compare还有另一种用户，可以直接执行函数并输出结果，使用方式如下：
+
+`.silky/data/normal/page.js`文件：
+
+	module.exports = {
+		plus: function(left, right){
+			return left + right
+		}
+	}
+
+`index.hbs`文件：
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    	<title>Compare</title>
+	    </head>
+	    <body>
+			1 + 5 = {{execute page.plus 1 5}}
+	    </body>
+	</html>
+	
+输出：
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    	<title>Compare</title>
+	    </head>
+	    <body>
+			1 + 5 = 6
+	    </body>
+	</html>
+	
