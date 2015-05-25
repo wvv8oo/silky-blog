@@ -214,6 +214,43 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 
 这样在`footer.hbs`文件中，我们就可以用`{{copyright}}`来引用`global.footer.copyright`了。这样做的目的就是为了代码更简洁。否则当嵌套引用模块的时候，我们有会需要写很冗长的代码才能引用到数据。
 
+在import指令中，假如你指定的数据源是一个非对象（包含String/Number/Boolean），那么在被引用的模块想使用这个数据，可以使用{{$current}}。这可能有点难理解，我们看一下下面的示例：
+
+`index.hbs`文件
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    	<title>import示例</title>
+	    </head>
+	    <body>
+	        {{import "module/footer" "silky.wvv8oo.com"}}
+	    </body>
+	</html>		
+	
+在`module/footer.hbs`文件中，我们可以使用`{{$current}}`来取得`import`传入的值。
+
+	<footer>
+		<!--用$current可以获取传入的非对象内容(String/Number/)-->
+	    Copyright &copy; <a href="http://example.com/" target="_blank">{{$current}}</a>
+	</footer>
+	
+结果：
+
+	<!DOCTYPE html>
+	<html>
+	    <head>
+	    	<title>import示例</title>
+	    </head>
+	    <body>
+			<footer>
+				<!--用$current可以获取传入的非对象内容(String/Number/)-->
+				Copyright &copy; <a href="http://example.com/" target="_blank">silky.wvv8oo.com</a>
+			</footer>
+	    </body>
+	</html>	
+	
+	
 ** 注意，这里会有陷阱！**
 
 如果指定了数据源，那么作用域将被改变，你在子模板中(上例的`footer.hbs`)所引用的数据源都是你所指定的数据源下（上例的数据源是`global.footer`）。在上面的示例中，如果你想在`header.hbs`中引用`global.title`这个数据，你无法使用`{{global.title}}`进行引用。但Silky提供另一种方法来引用全局数据，使用`_`可以在任何模块引用全局数据，如：`{{import _.global.title}}`。
@@ -267,6 +304,8 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 * `{{loop "module/cell" 5}}` 循环cell这个子模板5次
 * `{{loop "module/cell" data}}` 根据data来循环cell这个子模板，此时data的数据类型应该是`array`。**注意：此时cell的数据作用域会被改变**
 
+
+
 ### repeat
 
 重复内容N次，与loop不同的是，repeat并不引用子模板，仅仅是简单地重复。
@@ -275,11 +314,11 @@ Silky会先查找`/css/main.css`文件，如果没有找到此文件，那么Sil
 
 ````
 {{#repeat 5}}
-{{__index__}}. 我要出现5次
+{{$index}}. 我要出现5次
 {{/repeat}}
 ````
 
-`{{__index__}}`表示当前的索引值。
+`{{$index}}`表示当前的索引值。
 
 #### print
 
